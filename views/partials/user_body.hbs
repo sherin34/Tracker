@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page with Frames</title>
+    <style>
+        /* Style for the left frame (20% width) */
+        .left-frame {
+            width: 20%;
+            float: left;
+            height: 100vh; /* 100% of the viewport height */
+            background-color: #f0f0f0; /* Background color for the left frame */
+            overflow-y: scroll; /* Enable vertical scrolling if content exceeds frame height */
+        }
+
+        /* Style for the right frame (80% width) */
+        .right-frame {
+            width: 80%;
+            float: left;
+            height: 100vh; /* 100% of the viewport height */
+        }
+
+        /* Add some content and styling for demonstration */
+        .content {
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* Style for the navigation menu */
+        .nav-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Add hover effect to navigation items */
+        .nav-item:hover {
+            background-color: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Frame -->
+    <div class="left-frame">
+        <ul class="nav-menu">
+            <!-- Clicking these items will load content into the right frame -->
+            <li class="nav-item" onclick="loadPage('home')">Home</li>
+            <li class="nav-item" onclick="loadPage('campaigns')">Ongoing Campaigns</li>
+            <li class="nav-item" onclick="loadPage('profile')">My Profile</li>
+            <li class="nav-item" onclick="loadPage('reporting')">Reporting</li>
+            <li class="nav-item" onclick="loadPage('portfolio')">Portfolio</li>
+        </ul>
+    </div>
+
+    <!-- Right Frame -->
+    <div class="right-frame" id="right-frame">
+        <div class="content">
+            <!-- Default content for the right frame -->
+            <p>Select an option from the navigation menu.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript to load pages into the right frame -->
+    <script>
+        function loadPage(pageName) {
+            // Use AJAX or fetch to load content from the server based on the pageName
+            // For demonstration purposes, we'll load static content here
+            var content;
+            switch (pageName) {
+                case 'home':
+                    content = 'Welcome to the Home Page.';
+                    break;
+                case 'campaigns':
+                    content = 'Here are the ongoing campaigns.';
+                    break;
+                case 'profile':
+                    content = 'Your profile information goes here.';
+                    break;
+                case 'reporting':
+                    content = 'View and generate reports on this page.';
+                    break;
+                case 'portfolio':
+                    content = 'Explore your portfolio here.';
+                    break;
+                default:
+                    content = 'Select an option from the navigation menu.';
+            }
+            
+            // Update the right frame content
+            document.getElementById('right-frame').innerHTML = '<div class="content">' + content + '</div>';
+        }
+    </script>
+</body>
+</html>

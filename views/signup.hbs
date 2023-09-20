@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{pageTitle}}</title>
+    <!-- Add Bootstrap JavaScript and jQuery links here -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Header -->
+    
+
+    <!-- Main Content -->
+    <div class="container">
+       <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/signup" method="post">
+                        <div class="form-group">
+                            <label for="user_id">Username</label>
+                            <input type="text" class="form-control" id="user_id" name="user_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone no:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" id="signupButton" class="btn btn-primary">Sign Up</button>
+                        <div class="row mb-4">
+
+
+                <div class="col">
+                    <!-- Simple link -->
+                    <a href="login">Already have an account</a>
+                </div>
+            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Part Web Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+        .first-row{
+            height:100% ;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Part: Links -->
+            <div class="col-md-3 first-row">
+                <div class="list-group">
+                    <a href="#link1" class="list-group-item list-group-item-action" >DashBoard</a>
+                    <a href="#link2" class="list-group-item list-group-item-action">Portfolio Management</a>
+                    <a href="#link3" class="list-group-item list-group-item-action">Lead Register</a>
+                    <a href="#link4" class="list-group-item list-group-item-action">ToDo</a>
+                    <a href="#link5" class="list-group-item list-group-item-action">Assignments</a>
+                </div>
+            </div>
+            <!-- Right Part: Content -->
+            <div class="col-md-9">
+                <div id="link1" class="content-section active">
+                    <!-- Content for Link 1 -->
+                    <h2>Link 1 Content</h2>
+                    <p>This is the content for Link 1.</p>
+                </div>
+                <div id="link2" class="content-section">
+                    <!-- Content for Link 2 -->
+                    <h2>Link 2 Content</h2>
+                    <p>This is the content for Link 2.</p>
+                </div>
+                <div id="link3" class="content-section">
+                    <!-- Content for Link 3 -->
+                    <h2>Link 3 Content</h2>
+                    <p>This is the content for Link 3.</p>
+                </div>
+                <div id="link4" class="content-section">
+                    <!-- Content for Link 4 -->
+                    <h2>Link 4 Content</h2>
+                    <p>This is the content for Link 4.</p>
+                </div>
+                <div id="link5" class="content-section">
+                    <!-- Content for Link 5 -->
+                    <h2>Link 5 Content</h2>
+                    <p>This is the content for Link 5.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JavaScript (optional, only needed for certain components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Add event listeners to handle link clicks
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".list-group-item");
+            links.forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    // Hide all content sections
+                    document.querySelectorAll(".content-section").forEach((section) => {
+                        section.classList.remove("active");
+                    });
+                    // Show the content section corresponding to the clicked link
+                    const targetId = link.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

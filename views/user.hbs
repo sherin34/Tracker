@@ -1,0 +1,19 @@
+{{#if role.user}}
+{{>user_body}}
+{{else}}
+{{#if role.bm}}
+{{>bm_body}}
+{{else}}
+{{#if role.ch}}
+{{>ch_body}}
+{{else}}
+{{#if role.rh}}
+{{>rh_body}}
+{{else}}
+
+nothing detected
+
+{{/if}}
+{{/if}}
+{{/if}}
+{{/if}}
