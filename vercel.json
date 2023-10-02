@@ -2,7 +2,7 @@
     "version":2,
     "builds":[
         {
-            "src":"./routes/login.js",
+            "src":"./views/login.hbs",
             "use":"@vercel/node"
         }
        
