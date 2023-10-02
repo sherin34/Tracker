@@ -22,8 +22,15 @@
                 <div class="dropdown custom_padding_right">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{#if user}}
+    {{!-- for fresh loading of submnit report screen this userdata.user.userid is used to check --}}
+        {{#if userData.user.user_id}}
         {{userData.user.user_id}}
+        {{else}}
+        {{!-- for refreshing submitreport this username variable is used --}}
+        {{username}}
+        {{/if}}
         {{!-- success till now --}}
+
     {{else}}
     Account
     {{/if}}
@@ -32,13 +39,13 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
      {{#if user}}
-       <a class="dropdown-item" href="logout">Logout</a>
+       <a class="dropdown-item" href="login">Logout</a>
     {{else}}
     <a class="dropdown-item" href="login">Login</a>
     {{/if}}
     
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    {{!-- <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a> --}}
   </div>
 </div>
             </div>

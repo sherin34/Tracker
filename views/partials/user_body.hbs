@@ -1,100 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Page with Frames</title>
+    <title>Two-Part Web Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Style for the left frame (20% width) */
-        .left-frame {
-            width: 20%;
-            float: left;
-            height: 100vh; /* 100% of the viewport height */
-            background-color: #f0f0f0; /* Background color for the left frame */
-            overflow-y: scroll; /* Enable vertical scrolling if content exceeds frame height */
+        .content-section {
+            display: none;
         }
 
-        /* Style for the right frame (80% width) */
-        .right-frame {
-            width: 80%;
-            float: left;
-            height: 100vh; /* 100% of the viewport height */
+        .content-section.active {
+            display: block;
         }
 
-        /* Add some content and styling for demonstration */
-        .content {
-            padding: 20px;
-            text-align: center;
-            font-size: 18px;
+        .first-row {
+            height: 100%;
+            background-color: antiquewhite;
         }
 
-        /* Style for the navigation menu */
-        .nav-menu {
-            list-style-type: none;
-            padding: 0;
-        }
+        /* Add custom CSS for smaller screens (e.g., mobile devices) */
+        @media (max-width: 576px) {
+            .form-group {
+                display: table-row !important;
+            }
 
-        .nav-item {
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+            .col-md-6 {
+                width: 100% !important;
+            }
 
-        /* Add hover effect to navigation items */
-        .nav-item:hover {
-            background-color: #d0d0d0;
+            /* Adjust the width of the second column for two-digit numbers */
+            .col-md-6 .form-control {
+                max-width: 300px;
+                /* Adjust the width as needed */
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Left Frame -->
-    <div class="left-frame">
-        <ul class="nav-menu">
-            <!-- Clicking these items will load content into the right frame -->
-            <li class="nav-item" onclick="loadPage('home')">Home</li>
-            <li class="nav-item" onclick="loadPage('campaigns')">Ongoing Campaigns</li>
-            <li class="nav-item" onclick="loadPage('profile')">My Profile</li>
-            <li class="nav-item" onclick="loadPage('reporting')">Reporting</li>
-            <li class="nav-item" onclick="loadPage('portfolio')">Portfolio</li>
-        </ul>
-    </div>
 
-    <!-- Right Frame -->
-    <div class="right-frame" id="right-frame">
-        <div class="content">
-            <!-- Default content for the right frame -->
-            <p>Select an option from the navigation menu.</p>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Part: Links -->
+            <div class="col-md-3 first-row">
+                <div class="list-group">
+                    <a href="#dashboard" class="list-group-item list-group-item-action">DashBoard</a>
+                    <a href="#portfolio" class="list-group-item list-group-item-action">Portfolio Management</a>
+                    <a href="#reporting" class="list-group-item list-group-item-action">Daily Reporting</a>
+                    <a href="#todo" class="list-group-item list-group-item-action">ToDo</a>
+                    <a href="#campaigns" class="list-group-item list-group-item-action">Campaigns</a>
+                </div>
+            </div>
+            <!-- Right Part: Content -->
+            <div class="col-md-9">
+                <div id="dashboard" class="content-section">
+                    <!-- Content for Link 1 -->
+                    <h2>Link 1 Content</h2>
+                    <p>This is the content for Link 1.</p>
+                </div>
+                <div id="portfolio" class="content-section">
+                    <!-- Content for Link 2 -->
+                    <h2>Link 2 Content</h2>
+                    <p>This is the content for Link 2.</p>
+                </div>
+                <div id="reporting" class="content-section active">
+                    <!-- Content for Daily reporting -->
+                    {{!-- <h2>Daily Reporting</h2> --}}
+                    <div class="container mt-4">
+                        <h1>Daily Reporting</h1>
+                        <form action="/submitDailyReport" method="post">
+                            <div class="row">
+                                <!-- First Column -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="lifeInsurance">Life Insurance</label>
+                                        <input type="number" class="form-control" id="lifeInsurance"
+                                            name="lifeInsurance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="healthInsurance">Health Insurance</label>
+                                        <input type="number" class="form-control" id="healthInsurance"
+                                            name="healthInsurance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="generalInsurance">General Insurance</label>
+                                        <input type="number" class="form-control" id="generalInsurance"
+                                            name="generalInsurance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rd">RD</label>
+                                        <input type="number" class="form-control" id="rd" name="rd">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="termDeposit">Term Deposit</label>
+                                        <input type="number" class="form-control" id="termDeposit" name="termDeposit">
+                                    </div>
+                                </div>
+                                <!-- Second Column -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="casa">CASA</label>
+                                        <input type="number" class="form-control" id="casa" name="casa">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sbSilver">SB Silver and above</label>
+                                        <input type="number" class="form-control" id="sbSilver" name="sbSilver">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cdSilver">CD Silver and above</label>
+                                        <input type="number" class="form-control" id="cdSilver" name="cdSilver">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="housingLoanLead">Housing Loan Lead</label>
+                                        <input type="number" class="form-control" id="housingLoanLead"
+                                            name="housingLoanLead">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vehicleLoanLead">Vehicle Loan Lead</label>
+                                        <input type="number" class="form-control" id="vehicleLoanLead"
+                                            name="vehicleLoanLead">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="businessLoanLead">Business Loan Lead</label>
+                                        <input type="number" class="form-control" id="businessLoanLead"
+                                            name="businessLoanLead">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                    {{!-- end of daily reporting --}}
+                </div>
+                <div id="todo" class="content-section">
+                    <!-- Content for Link 4 -->
+                    <h2>Link 4 Content</h2>
+                    <p>This is the content for Link 4.</p>
+                </div>
+                <div id="campaigns" class="content-section">
+                    <!-- Content for Link 5 -->
+                    <h2>Link 5 Content</h2>
+                    <p>This is the content for Link 5.</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript to load pages into the right frame -->
+    <!-- Include Bootstrap JavaScript (optional, only needed for certain components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
     <script>
-        function loadPage(pageName) {
-            // Use AJAX or fetch to load content from the server based on the pageName
-            // For demonstration purposes, we'll load static content here
-            var content;
-            switch (pageName) {
-                case 'home':
-                    content = 'Welcome to the Home Page.';
-                    break;
-                case 'campaigns':
-                    content = 'Here are the ongoing campaigns.';
-                    break;
-                case 'profile':
-                    content = 'Your profile information goes here.';
-                    break;
-                case 'reporting':
-                    content = 'View and generate reports on this page.';
-                    break;
-                case 'portfolio':
-                    content = 'Explore your portfolio here.';
-                    break;
-                default:
-                    content = 'Select an option from the navigation menu.';
-            }
-            
-            // Update the right frame content
-            document.getElementById('right-frame').innerHTML = '<div class="content">' + content + '</div>';
-        }
+        // Add event listeners to handle link clicks
+        document.addEventListener("DOMContentLoaded", function () {
+            const links = document.querySelectorAll(".list-group-item");
+            links.forEach((link) => {
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    // Hide all content sections
+                    document.querySelectorAll(".content-section").forEach((section) => {
+                        section.classList.remove("active");
+                    });
+                    // Show the content section corresponding to the clicked link
+                    const targetId = link.getAttribute("href").substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add("active");
+                    }
+                });
+            });
+        });
     </script>
 </body>
+
 </html>

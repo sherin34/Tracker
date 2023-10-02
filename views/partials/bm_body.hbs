@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Two-Part Web Page</title>
+
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .content-section {
             display: none;
@@ -14,48 +17,161 @@
         .content-section.active {
             display: block;
         }
-        .first-row{
-            height:100% ;
+
+        .first-row {
+            height: 100%;
             background-color: antiquewhite;
         }
     </style>
+
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Left Part: Links -->
             <div class="col-md-3 first-row">
                 <div class="list-group">
-                    <a href="#link1" class="list-group-item list-group-item-action" >DashBoard</a>
-                    <a href="#link2" class="list-group-item list-group-item-action">Portfolio Management</a>
-                    <a href="#link3" class="list-group-item list-group-item-action">Lead Register</a>
-                    <a href="#link4" class="list-group-item list-group-item-action">ToDo</a>
-                    <a href="#link5" class="list-group-item list-group-item-action">Assignments</a>
+                    <a href="#dashboard" class="list-group-item list-group-item-action">DashBoard</a>
+                    <a href="#portfolio" class="list-group-item list-group-item-action">Portfolio Management</a>
+                    <a href="#dailyReporting" class="list-group-item list-group-item-action">Daily Reporting</a>
+                    <a href="#todo" class="list-group-item list-group-item-action">ToDo</a>
+                    <a href="#assignment" class="list-group-item list-group-item-action">Assignments</a>
                 </div>
             </div>
             <!-- Right Part: Content -->
             <div class="col-md-9">
-                <div id="link1" class="content-section active">
+                <div id="dashboard" class="content-section">
                     <!-- Content for Link 1 -->
                     <h2>Link 1 Content</h2>
                     <p>This is the content for Link 1.</p>
                 </div>
-                <div id="link2" class="content-section">
+                <div id="portfolio" class="content-section">
                     <!-- Content for Link 2 -->
                     <h2>Link 2 Content</h2>
                     <p>This is the content for Link 2.</p>
                 </div>
-                <div id="link3" class="content-section">
+                <div id="dailyReporting" class="content-section active">
                     <!-- Content for Link 3 -->
-                    <h2>Link 3 Content</h2>
-                    <p>This is the content for Link 3.</p>
+
+
+                    <div class="container mt-4">
+                        <h1>Show Daily Reporting Chart</h1>
+                        <div class="container mt-5 col-md-12">
+                            <form action="/applyfiltersBM" method="POST" class="row">
+
+
+                                <div class="form-group col-md-4">
+                                    <label for="fromDate">from</label>
+                                    <input type="date" class="form-control" id="fromDate" name="fromDate">
+                                </div>
+
+
+
+                                <div class="form-group col-md-4">
+                                    <label for="toDate">To</label>
+                                    <input type="date" class="form-control" id="toDate" name="toDate">
+                                </div>
+
+                                <div class=" form-group col-md-4">
+                                    <div>
+                                        <label for="toDate"></label>
+                                    </div>
+                                    <div>
+
+                                        <button type="submit" name="buttonAction" value="applyFilter"
+                                            class="btn btn-primary">Apply
+                                            Filters</button>
+                                        <button type="submit" name="buttonAction" value="resetFilter"
+                                            class="btn btn-primary">Reset
+                                            filter</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <table class="table table-bordered mt-5">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Life</th>
+                                    <th>Health</th>
+                                    <th>General</th>
+                                    <th>RD</th>
+                                    <th>Term Deposit</th>
+                                    <th>CASA</th>
+                                    <th>SB Silver</th>
+                                    <th>CD</th>
+                                    <th>Housing Loan</th>
+                                    <th>Vehicle Loan</th>
+                                    <th>Business Loan</th>
+                                    <th>Total Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each bm_data}}
+                                <tr>
+                                    <td> {{this.name}} </td>
+                                    <td>{{this.date}}</td>
+                                    <td>{{this.life_rep}}</td>
+                                    <td>{{this.health_rep}}</td>
+                                    <td>{{this.general_rep}}</td>
+                                    <td>{{this.rd_rep}}</td>
+                                    <td>{{this.term_deposit_rep}}</td>
+                                    <td>{{this.casa_rep}}</td>
+                                    <td>{{this.sb_silver_rep}}</td>
+                                    <td>{{this.cd_rep}}</td>
+                                    <td>{{this.housing_loan_rep}}</td>
+                                    <td>{{this.vehicle_loan_rep}}</td>
+                                    <td>{{this.business_loan_rep}}</td>
+                                    <td>{{this.total_points}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            Chart View
+                        </button>
+                        {{!-- modal start --}}
+
+                        <div class="modal" id="myModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Title</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <canvas id="lineChart"></canvas>
+
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- modal end --}}
+                    </div>
+
                 </div>
-                <div id="link4" class="content-section">
+                <div id="todo" class="content-section">
                     <!-- Content for Link 4 -->
                     <h2>Link 4 Content</h2>
                     <p>This is the content for Link 4.</p>
                 </div>
-                <div id="link5" class="content-section">
+                <div id="assignment" class="content-section">
                     <!-- Content for Link 5 -->
                     <h2>Link 5 Content</h2>
                     <p>This is the content for Link 5.</p>
@@ -67,25 +183,60 @@
     <!-- Include Bootstrap JavaScript (optional, only needed for certain components) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
     <script>
+
         // Add event listeners to handle link clicks
         document.addEventListener("DOMContentLoaded", function () {
-            const links = document.querySelectorAll(".list-group-item");
-            links.forEach((link) => {
-                link.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    // Hide all content sections
-                    document.querySelectorAll(".content-section").forEach((section) => {
-                        section.classList.remove("active");
-                    });
-                    // Show the content section corresponding to the clicked link
-                    const targetId = link.getAttribute("href").substring(1);
-                    const targetSection = document.getElementById(targetId);
-                    if (targetSection) {
-                        targetSection.classList.add("active");
-                    }
+  console.log("run till here");
+
+            const ctx = document.getElementById('lineChart').getContext('2d');
+    const sqlResult={{bm_data}};
+    const myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: sqlResult.map((item) => item.name), // Array of names
+          datasets: [
+            {
+              label: "Total Points",
+              data: sqlResult.map((item) => item.total_points), // Array of total_points
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+              fill: false,
+            },
+          ],
+        }, // Use the chartData object from step 1
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+      
+        const links = document.querySelectorAll(".list-group-item");
+        links.forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                // Hide all content sections
+                document.querySelectorAll(".content-section").forEach((section) => {
+                    section.classList.remove("active");
                 });
+                // Show the content section corresponding to the clicked link
+                const targetId = link.getAttribute("href").substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add("active");
+                }
             });
         });
+        });
+
+
+
+
+
     </script>
+
 </body>
+
 </html>
